@@ -1,2078 +1,1495 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PRO SUPLEMENTOS — Domine o Treino</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      /* ============================================================
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRO SUPLEMENTOS — Domine o Treino</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
    RESET & BASE
 ============================================================ */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      :root {
-        --red: #e63b2e;
-        --red2: #c42d22;
-        --black: #080808;
-        --dark: #0f0f0f;
-        --card: #111111;
-        --border: #1e1e1e;
-        --white: #ffffff;
-        --gray: #888888;
-        --light: #aaaaaa;
-      }
+:root {
+  --red:    #e63b2e;
+  --red2:   #c42d22;
+  --black:  #080808;
+  --dark:   #0f0f0f;
+  --card:   #111111;
+  --border: #1e1e1e;
+  --white:  #ffffff;
+  --gray:   #888888;
+  --light:  #aaaaaa;
+}
 
-      html {
-        scroll-behavior: smooth;
-      }
+html { scroll-behavior: smooth; }
 
-      body {
-        background: var(--black);
-        color: var(--white);
-        font-family: "Barlow", sans-serif;
-        overflow-x: hidden;
-        cursor: default;
-      }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
 
-      /* custom scrollbar */
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-      ::-webkit-scrollbar-track {
-        background: var(--black);
-      }
-      ::-webkit-scrollbar-thumb {
-        background: var(--red);
-      }
+/* custom scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--red); }
 
-      /* ============================================================
+/* ============================================================
    NOISE OVERLAY
 ============================================================ */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-        opacity: 0.025;
-        pointer-events: none;
-        z-index: 9999;
-      }
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-      /* ============================================================
+/* ============================================================
    TYPOGRAPHY HELPERS
 ============================================================ */
-      .label {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 11px;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: var(--red);
-      }
-      .label::before {
-        content: "";
-        display: inline-block;
-        width: 28px;
-        height: 1px;
-        background: var(--red);
-      }
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.label::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--red);
+}
 
-      h2.display {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(48px, 8vw, 88px);
-        letter-spacing: 2px;
-        line-height: 0.92;
-        color: var(--white);
-      }
-      h2.display span {
-        color: var(--red);
-      }
+h2.display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 88px);
+  letter-spacing: 2px;
+  line-height: 0.92;
+  color: var(--white);
+}
+h2.display span { color: var(--red); }
 
-      .section-sub {
-        font-size: 15px;
-        color: var(--gray);
-        line-height: 1.7;
-        max-width: 480px;
-      }
+.section-sub {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 480px;
+}
 
-      /* ============================================================
+/* ============================================================
    NAV
 ============================================================ */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 60px;
-        height: 72px;
-        background: rgba(8, 8, 8, 0.85);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--border);
-      }
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
 
-      .nav-logo {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 28px;
-        letter-spacing: 3px;
-        color: var(--white);
-        text-decoration: none;
-      }
-      .nav-logo span {
-        color: var(--red);
-      }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  color: var(--white);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--red); }
 
-      .nav-links {
-        display: flex;
-        gap: 36px;
-        list-style: none;
-      }
-      .nav-links a {
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 600;
-        font-size: 13px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--gray);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--white);
-      }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
 
-      .nav-cta {
-        background: var(--red);
-        color: var(--white) !important;
-        padding: 10px 22px;
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-decoration: none;
-        border: 1px solid transparent;
-        transition:
-          background 0.2s,
-          border-color 0.2s,
-          color 0.2s !important;
-      }
-      .nav-cta:hover {
-        background: transparent !important;
-        border-color: var(--red) !important;
-        color: var(--red) !important;
-      }
+.nav-cta {
+  background: var(--red);
+  color: var(--white) !important;
+  padding: 10px 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s, color 0.2s !important;
+}
+.nav-cta:hover {
+  background: transparent !important;
+  border-color: var(--red) !important;
+  color: var(--red) !important;
+}
 
-      @media (max-width: 768px) {
-        nav {
-          padding: 0 24px;
-        }
-        .nav-links {
-          display: none;
-        }
-      }
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+}
 
-      /* ============================================================
+/* ============================================================
    HERO
 ============================================================ */
-      #hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 120px 60px 80px;
-        position: relative;
-        overflow: hidden;
-      }
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
 
-      /* big BG text */
-      #hero::before {
-        content: "PRO";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(200px, 35vw, 480px);
-        letter-spacing: -10px;
-        color: var(--white);
-        opacity: 0.02;
-        user-select: none;
-        white-space: nowrap;
-        pointer-events: none;
-      }
+/* big BG text */
+#hero::before {
+  content: 'PRO';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(200px, 35vw, 480px);
+  letter-spacing: -10px;
+  color: var(--white);
+  opacity: 0.02;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+}
 
-      /* red diagonal strip */
-      #hero::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: -100px;
-        width: 55%;
-        height: 100%;
-        background: linear-gradient(
-          105deg,
-          transparent 30%,
-          #e63b2e0a 60%,
-          #e63b2e14 100%
-        );
-        pointer-events: none;
-      }
+/* red diagonal strip */
+#hero::after {
+  content: '';
+  position: absolute;
+  top: 0; right: -100px;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 30%, #e63b2e0a 60%, #e63b2e14 100%);
+  pointer-events: none;
+}
 
-      .hero-inner {
-        position: relative;
-        z-index: 2;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-        align-items: center;
-      }
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
 
-      .hero-left {
-      }
+.hero-left { }
 
-      .hero-eyebrow {
-        margin-bottom: 24px;
-        animation: fadeUp 0.7s ease both 0.1s;
-      }
+.hero-eyebrow {
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s ease both 0.1s;
+}
 
-      .hero-title {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(64px, 10vw, 120px);
-        line-height: 0.88;
-        letter-spacing: 2px;
-        color: var(--white);
-        animation: fadeUp 0.7s ease both 0.2s;
-      }
-      .hero-title .red {
-        color: var(--red);
-      }
-      .hero-title .outline {
-        -webkit-text-stroke: 2px var(--white);
-        color: transparent;
-      }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 120px);
+  line-height: 0.88;
+  letter-spacing: 2px;
+  color: var(--white);
+  animation: fadeUp 0.7s ease both 0.2s;
+}
+.hero-title .red { color: var(--red); }
+.hero-title .outline {
+  -webkit-text-stroke: 2px var(--white);
+  color: transparent;
+}
 
-      .hero-desc {
-        margin-top: 28px;
-        font-size: 16px;
-        color: var(--gray);
-        line-height: 1.7;
-        max-width: 420px;
-        animation: fadeUp 0.7s ease both 0.35s;
-      }
+.hero-desc {
+  margin-top: 28px;
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 420px;
+  animation: fadeUp 0.7s ease both 0.35s;
+}
 
-      .hero-actions {
-        margin-top: 40px;
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        animation: fadeUp 0.7s ease both 0.45s;
-      }
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s ease both 0.45s;
+}
 
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: var(--red);
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 13px;
-        letter-spacing: 2.5px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 16px 32px;
-        border: 1px solid var(--red);
-        transition:
-          background 0.25s,
-          color 0.25s;
-      }
-      .btn-primary:hover {
-        background: transparent;
-        color: var(--red);
-      }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border: 1px solid var(--red);
+  transition: background 0.25s, color 0.25s;
+}
+.btn-primary:hover { background: transparent; color: var(--red); }
 
-      .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: transparent;
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 13px;
-        letter-spacing: 2.5px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 16px 32px;
-        border: 1px solid var(--border);
-        transition:
-          border-color 0.25s,
-          color 0.25s;
-      }
-      .btn-secondary:hover {
-        border-color: var(--white);
-      }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 32px;
+  border: 1px solid var(--border);
+  transition: border-color 0.25s, color 0.25s;
+}
+.btn-secondary:hover { border-color: var(--white); }
 
-      .hero-stats {
-        display: flex;
-        gap: 40px;
-        margin-top: 56px;
-        padding-top: 40px;
-        border-top: 1px solid var(--border);
-        animation: fadeUp 0.7s ease both 0.55s;
-      }
-      .stat-num {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 42px;
-        color: var(--white);
-        line-height: 1;
-      }
-      .stat-num span {
-        color: var(--red);
-      }
-      .stat-label {
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--gray);
-        margin-top: 4px;
-      }
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.7s ease both 0.55s;
+}
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-num span { color: var(--red); }
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 4px;
+}
 
-      /* hero right: big product visual placeholder */
-      .hero-right {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        animation: fadeUp 0.7s ease both 0.3s;
-      }
+/* hero right: big product visual placeholder */
+.hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: fadeUp 0.7s ease both 0.3s;
+}
 
-      .hero-visual {
-        width: 380px;
-        height: 480px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+.hero-visual {
+  width: 380px;
+  height: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      .hero-visual-ring {
-        position: absolute;
-        width: 340px;
-        height: 340px;
-        border: 1px solid #e63b2e22;
-        border-radius: 50%;
-        animation: spin 20s linear infinite;
-      }
-      .hero-visual-ring.r2 {
-        width: 420px;
-        height: 420px;
-        border-color: #e63b2e11;
-        animation-direction: reverse;
-        animation-duration: 30s;
-      }
+.hero-visual-ring {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border: 1px solid #e63b2e22;
+  border-radius: 50%;
+  animation: spin 20s linear infinite;
+}
+.hero-visual-ring.r2 {
+  width: 420px; height: 420px;
+  border-color: #e63b2e11;
+  animation-direction: reverse;
+  animation-duration: 30s;
+}
 
-      .hero-product-box {
-        width: 220px;
-        height: 320px;
-        background: linear-gradient(160deg, #1a1a1a 0%, #111 60%, #0d0d0d 100%);
-        border: 1px solid var(--border);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        position: relative;
-        z-index: 2;
-      }
-      .hero-product-box::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--red);
-      }
+.hero-product-box {
+  width: 220px;
+  height: 320px;
+  background: linear-gradient(160deg, #1a1a1a 0%, #111 60%, #0d0d0d 100%);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+.hero-product-box::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+}
 
-      .hero-product-icon {
-        color: var(--red);
-        opacity: 0.9;
-      }
+.hero-product-icon {
+  color: var(--red);
+  opacity: 0.9;
+}
 
-      .hero-product-name {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 20px;
-        letter-spacing: 3px;
-        color: var(--white);
-        text-align: center;
-      }
+.hero-product-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: var(--white);
+  text-align: center;
+}
 
-      .hero-product-sub {
-        font-size: 11px;
-        letter-spacing: 2px;
-        color: var(--gray);
-        text-transform: uppercase;
-        text-align: center;
-      }
+.hero-product-sub {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gray);
+  text-transform: uppercase;
+  text-align: center;
+}
 
-      .hero-badge {
-        position: absolute;
-        top: 20px;
-        right: -20px;
-        width: 80px;
-        height: 80px;
-        background: var(--red);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 3;
-      }
-      .hero-badge-num {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 28px;
-        line-height: 1;
-        color: var(--white);
-      }
-      .hero-badge-text {
-        font-size: 8px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.7);
-      }
+.hero-badge {
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: var(--red);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+.hero-badge-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--white);
+}
+.hero-badge-text {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
 
-      @media (max-width: 900px) {
-        #hero {
-          padding: 100px 24px 60px;
-        }
-        .hero-inner {
-          grid-template-columns: 1fr;
-        }
-        .hero-right {
-          display: none;
-        }
-      }
+@media (max-width: 900px) {
+  #hero { padding: 100px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+}
 
-      /* ============================================================
+/* ============================================================
    TICKER STRIP
 ============================================================ */
-      .ticker {
-        background: var(--red);
-        padding: 14px 0;
-        overflow: hidden;
-        white-space: nowrap;
-      }
-      .ticker-inner {
-        display: inline-flex;
-        animation: ticker 22s linear infinite;
-      }
-      .ticker-item {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 16px;
-        letter-spacing: 3px;
-        color: var(--white);
-        padding: 0 40px;
-        display: inline-flex;
-        align-items: center;
-        gap: 16px;
-      }
-      .ticker-dot {
-        width: 5px;
-        height: 5px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        flex-shrink: 0;
-      }
+.ticker {
+  background: var(--red);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-inner {
+  display: inline-flex;
+  animation: ticker 22s linear infinite;
+}
+.ticker-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  color: var(--white);
+  padding: 0 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+.ticker-dot {
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 
-      @keyframes ticker {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
 
-      /* ============================================================
+/* ============================================================
    SECTION WRAPPER
 ============================================================ */
-      .section {
-        padding: 100px 60px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .section-full {
-        padding: 100px 60px;
-      }
+.section {
+  padding: 100px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-full {
+  padding: 100px 60px;
+}
 
-      @media (max-width: 768px) {
-        .section,
-        .section-full {
-          padding: 70px 24px;
-        }
-      }
+@media (max-width: 768px) {
+  .section, .section-full { padding: 70px 24px; }
+}
 
-      .section-head {
-        margin-bottom: 64px;
-      }
-      .section-head .label {
-        margin-bottom: 16px;
-      }
+.section-head {
+  margin-bottom: 64px;
+}
+.section-head .label { margin-bottom: 16px; }
 
-      /* ============================================================
+/* ============================================================
    WHY SUPPLEMENTS — 4 cards
 ============================================================ */
-      #why {
-        background: var(--dark);
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-      }
+#why {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
 
-      .why-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2px;
-        margin-top: 60px;
-      }
-      @media (max-width: 900px) {
-        .why-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 520px) {
-        .why-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+@media (max-width: 900px) { .why-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px) { .why-grid { grid-template-columns: 1fr; } }
 
-      .why-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 40px 28px 44px;
-        position: relative;
-        overflow: hidden;
-        transition:
-          border-color 0.35s,
-          background 0.35s;
-      }
-      .why-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, #e63b2e08 0%, transparent 60%);
-        opacity: 0;
-        transition: opacity 0.35s;
-      }
-      .why-card::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--red);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      .why-card:hover {
-        border-color: #e63b2e44;
-        background: #141414;
-      }
-      .why-card:hover::before {
-        opacity: 1;
-      }
-      .why-card:hover::after {
-        transform: scaleX(1);
-      }
+.why-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 40px 28px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s, background 0.35s;
+}
+.why-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #e63b2e08 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.why-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+}
+.why-card:hover { border-color: #e63b2e44; background: #141414; }
+.why-card:hover::before { opacity: 1; }
+.why-card:hover::after  { transform: scaleX(1); }
 
-      .why-card-num {
-        position: absolute;
-        top: -10px;
-        right: 16px;
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 100px;
-        color: var(--white);
-        opacity: 0.03;
-        line-height: 1;
-        user-select: none;
-        transition: opacity 0.35s;
-      }
-      .why-card:hover .why-card-num {
-        opacity: 0.06;
-      }
+.why-card-num {
+  position: absolute;
+  top: -10px; right: 16px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 100px;
+  color: var(--white);
+  opacity: 0.03;
+  line-height: 1;
+  user-select: none;
+  transition: opacity 0.35s;
+}
+.why-card:hover .why-card-num { opacity: 0.06; }
 
-      .why-icon {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 24px;
-        display: block;
-        color: var(--red);
-        transition:
-          transform 0.3s,
-          filter 0.3s;
-      }
-      .why-card:hover .why-icon {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 8px #e63b2e66);
-      }
+.why-icon {
+  width: 48px; height: 48px;
+  margin-bottom: 24px;
+  display: block;
+  color: var(--red);
+  transition: transform 0.3s, filter 0.3s;
+}
+.why-card:hover .why-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #e63b2e66);
+}
 
-      .why-title {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 22px;
-        letter-spacing: 1.5px;
-        color: var(--white);
-        margin-bottom: 14px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .why-title-bar {
-        display: inline-block;
-        width: 20px;
-        height: 2px;
-        background: var(--red);
-        flex-shrink: 0;
-      }
+.why-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.why-title-bar {
+  display: inline-block;
+  width: 20px; height: 2px;
+  background: var(--red);
+  flex-shrink: 0;
+}
 
-      .why-text {
-        font-size: 13.5px;
-        line-height: 1.75;
-        color: var(--gray);
-        transition: color 0.35s;
-      }
-      .why-card:hover .why-text {
-        color: var(--light);
-      }
+.why-text {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--gray);
+  transition: color 0.35s;
+}
+.why-card:hover .why-text { color: var(--light); }
 
-      .why-tag {
-        display: inline-block;
-        margin-top: 22px;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 2.5px;
-        text-transform: uppercase;
-        color: var(--red);
-        opacity: 0;
-        transform: translateY(6px);
-        transition:
-          opacity 0.35s,
-          transform 0.35s;
-      }
-      .why-card:hover .why-tag {
-        opacity: 1;
-        transform: translateY(0);
-      }
+.why-tag {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.why-card:hover .why-tag { opacity: 1; transform: translateY(0); }
 
-      /* ============================================================
+/* ============================================================
    PRODUCTS GRID
 ============================================================ */
-      #products {
-        background: var(--black);
-      }
+#products { background: var(--black); }
 
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-      @media (max-width: 900px) {
-        .products-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 540px) {
-        .products-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .products-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 540px)  { .products-grid { grid-template-columns: 1fr; } }
 
-      .product-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        overflow: hidden;
-        position: relative;
-        transition:
-          border-color 0.4s,
-          transform 0.4s,
-          box-shadow 0.4s;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-      }
-      .product-card:hover {
-        border-color: var(--red);
-        transform: translateY(-6px);
-        box-shadow: 0 24px 60px rgba(230, 59, 46, 0.18);
-      }
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover {
+  border-color: var(--red);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(230,59,46,0.18);
+}
 
-      /* category badge */
-      .product-badge {
-        display: inline-block;
-        background: var(--red);
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        padding: 5px 10px;
-        margin-bottom: 20px;
-      }
+/* category badge */
+.product-badge {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}
 
-      /* ---- body ---- */
-      .product-body {
-        padding: 24px 24px 28px;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        border-top: 1px solid var(--border);
-        transition: border-color 0.4s;
-      }
-      .product-card:hover .product-body {
-        border-top-color: #e63b2e44;
-      }
+/* ---- body ---- */
+.product-body {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-top: 1px solid var(--border);
+  transition: border-color 0.4s;
+}
+.product-card:hover .product-body { border-top-color: #e63b2e44; }
 
-      .product-meta {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 10px;
-      }
+.product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
 
-      .product-name {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 26px;
-        letter-spacing: 2px;
-        color: var(--white);
-        line-height: 1;
-      }
+.product-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 2px;
+  color: var(--white);
+  line-height: 1;
+}
 
-      .product-stars {
-        display: flex;
-        gap: 2px;
-      }
-      .product-stars span {
-        color: var(--red);
-        font-size: 11px;
-      }
+.product-stars {
+  display: flex;
+  gap: 2px;
+}
+.product-stars span { color: var(--red); font-size: 11px; }
 
-      .product-desc {
-        font-size: 13px;
-        color: var(--gray);
-        line-height: 1.65;
-        margin-bottom: 20px;
-        flex: 1;
-      }
+.product-desc {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  flex: 1;
+}
 
-      .product-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
-      .product-tag {
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--gray);
-        border: 1px solid var(--border);
-        padding: 4px 10px;
-      }
+.product-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+}
 
-      .product-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--red);
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 11px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 12px 20px;
-        border: 1px solid var(--red);
-        transition:
-          background 0.25s,
-          color 0.25s;
-        white-space: nowrap;
-      }
-      .product-btn:hover {
-        background: transparent;
-        color: var(--red);
-      }
+.product-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: 1px solid var(--red);
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+.product-btn:hover { background: transparent; color: var(--red); }
 
-      .product-btn svg {
-        width: 14px;
-        height: 14px;
-        transition: transform 0.25s;
-      }
-      .product-btn:hover svg {
-        transform: translateX(3px);
-      }
+.product-btn svg {
+  width: 14px; height: 14px;
+  transition: transform 0.25s;
+}
+.product-btn:hover svg { transform: translateX(3px); }
 
-      /* ============================================================
+/* ============================================================
    FEATURE STRIP (3 icons)
 ============================================================ */
-      #features {
-        background: var(--red);
-        padding: 60px;
-      }
-      .features-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: rgba(255, 255, 255, 0.15);
-      }
-      @media (max-width: 700px) {
-        .features-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+#features {
+  background: var(--red);
+  padding: 60px;
+}
+.features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.15);
+}
+@media (max-width: 700px) { .features-grid { grid-template-columns: 1fr; } }
 
-      .feature-item {
-        background: var(--red);
-        padding: 40px 36px;
-        display: flex;
-        align-items: flex-start;
-        gap: 20px;
-      }
-      .feature-icon {
-        width: 44px;
-        height: 44px;
-        flex-shrink: 0;
-        color: rgba(255, 255, 255, 0.85);
-      }
-      .feature-title {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 20px;
-        letter-spacing: 1.5px;
-        color: var(--white);
-        margin-bottom: 6px;
-      }
-      .feature-text {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-      }
+.feature-item {
+  background: var(--red);
+  padding: 40px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.feature-icon {
+  width: 44px; height: 44px;
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.85);
+}
+.feature-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.feature-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+}
 
-      /* ============================================================
+/* ============================================================
    TESTIMONIALS
 ============================================================ */
-      #testimonials {
-        background: var(--dark);
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-      }
+#testimonials { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
-      .testi-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
-        margin-top: 56px;
-      }
-      @media (max-width: 900px) {
-        .testi-grid {
-          grid-template-columns: 1fr;
-        }
-      }
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+@media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr; } }
 
-      .testi-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 36px 30px;
-        position: relative;
-      }
-      .testi-quote {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 72px;
-        color: var(--red);
-        line-height: 0.8;
-        opacity: 0.3;
-        margin-bottom: 12px;
-        user-select: none;
-      }
-      .testi-text {
-        font-size: 14px;
-        color: var(--light);
-        line-height: 1.75;
-        font-style: italic;
-        margin-bottom: 28px;
-      }
-      .testi-author {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-      }
-      .testi-avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 18px;
-        color: var(--red);
-        border: 1px solid #e63b2e44;
-      }
-      .testi-name {
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--white);
-      }
-      .testi-role {
-        font-size: 12px;
-        color: var(--gray);
-        margin-top: 2px;
-      }
-      .testi-stars {
-        position: absolute;
-        top: 32px;
-        right: 24px;
-        display: flex;
-        gap: 3px;
-      }
-      .star {
-        color: var(--red);
-        font-size: 13px;
-      }
+.testi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 36px 30px;
+  position: relative;
+}
+.testi-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  color: var(--red);
+  line-height: 0.8;
+  opacity: 0.3;
+  margin-bottom: 12px;
+  user-select: none;
+}
+.testi-text {
+  font-size: 14px;
+  color: var(--light);
+  line-height: 1.75;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--red);
+  border: 1px solid #e63b2e44;
+}
+.testi-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.testi-role {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+.testi-stars {
+  position: absolute;
+  top: 32px; right: 24px;
+  display: flex;
+  gap: 3px;
+}
+.star { color: var(--red); font-size: 13px; }
 
-      /* ============================================================
+/* ============================================================
    CTA BANNER
 ============================================================ */
-      #cta {
-        background: var(--black);
-        padding: 100px 60px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-      #cta::before {
-        content: "NOW";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(180px, 30vw, 380px);
-        color: var(--white);
-        opacity: 0.018;
-        letter-spacing: -5px;
-        user-select: none;
-        pointer-events: none;
-      }
+#cta {
+  background: var(--black);
+  padding: 100px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#cta::before {
+  content: 'NOW';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(180px, 30vw, 380px);
+  color: var(--white);
+  opacity: 0.018;
+  letter-spacing: -5px;
+  user-select: none;
+  pointer-events: none;
+}
 
-      .cta-inner {
-        max-width: 700px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-      }
-      .cta-label {
-        margin-bottom: 20px;
-        justify-content: center;
-      }
-      .cta-title {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(52px, 8vw, 96px);
-        line-height: 0.9;
-        color: var(--white);
-        margin-bottom: 24px;
-      }
-      .cta-title span {
-        color: var(--red);
-      }
-      .cta-text {
-        font-size: 16px;
-        color: var(--gray);
-        line-height: 1.7;
-        margin-bottom: 44px;
-      }
-      .cta-form {
-        display: flex;
-        gap: 0;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-      .cta-input {
-        flex: 1;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-right: none;
-        color: var(--white);
-        font-family: "Barlow", sans-serif;
-        font-size: 14px;
-        padding: 16px 20px;
-        outline: none;
-        transition: border-color 0.2s;
-      }
-      .cta-input::placeholder {
-        color: var(--gray);
-      }
-      .cta-input:focus {
-        border-color: var(--red);
-      }
-      .cta-submit {
-        background: var(--red);
-        color: var(--white);
-        border: 1px solid var(--red);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        padding: 16px 28px;
-        cursor: pointer;
-        transition:
-          background 0.2s,
-          color 0.2s;
-        white-space: nowrap;
-      }
-      .cta-submit:hover {
-        background: var(--red2);
-      }
+.cta-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.cta-label { margin-bottom: 20px; justify-content: center; }
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 8vw, 96px);
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.cta-title span { color: var(--red); }
+.cta-text {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.7;
+  margin-bottom: 44px;
+}
 
-      @media (max-width: 520px) {
-        .cta-form {
-          flex-direction: column;
-        }
-        .cta-input {
-          border-right: 1px solid var(--border);
-          border-bottom: none;
-        }
-      }
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 40px;
+  border: none;
+  transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 32px rgba(253,29,29,0.3);
+}
+.btn-instagram:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(253,29,29,0.45);
+}
 
-      /* ============================================================
+/* ============================================================
    FOOTER
 ============================================================ */
-      footer {
-        background: var(--dark);
-        border-top: 1px solid var(--border);
-        padding: 60px;
-      }
-      .footer-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 48px;
-      }
-      @media (max-width: 900px) {
-        .footer-inner {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 520px) {
-        .footer-inner {
-          grid-template-columns: 1fr;
-        }
-        footer {
-          padding: 40px 24px;
-        }
-      }
+footer {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  padding: 60px;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 900px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .footer-inner { grid-template-columns: 1fr; } footer { padding: 40px 24px; } }
 
-      .footer-logo {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 32px;
-        letter-spacing: 3px;
-        color: var(--white);
-        margin-bottom: 16px;
-        display: block;
-        text-decoration: none;
-      }
-      .footer-logo span {
-        color: var(--red);
-      }
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 3px;
+  color: var(--white);
+  margin-bottom: 16px;
+  display: block;
+  text-decoration: none;
+}
+.footer-logo span { color: var(--red); }
 
-      .footer-desc {
-        font-size: 13px;
-        color: var(--gray);
-        line-height: 1.7;
-        max-width: 280px;
-      }
+.footer-desc {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 280px;
+}
 
-      .footer-col-title {
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 11px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: var(--white);
-        margin-bottom: 20px;
-      }
+.footer-col-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+}
 
-      .footer-links {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .footer-links a {
-        font-size: 13px;
-        color: var(--gray);
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: var(--red);
-      }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 13px;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--red); }
 
-      .footer-bottom {
-        max-width: 1200px;
-        margin: 48px auto 0;
-        padding-top: 28px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .footer-copy {
-        font-size: 12px;
-        color: var(--gray);
-        letter-spacing: 1px;
-      }
-      .footer-whats {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: #25d366;
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 10px 20px;
-        transition: opacity 0.2s;
-      }
-      .footer-whats:hover {
-        opacity: 0.85;
-      }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 48px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray);
+  letter-spacing: 1px;
+}
+.footer-whats {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: opacity 0.2s;
+}
+.footer-whats:hover { opacity: 0.85; }
 
-      /* ============================================================
+/* ============================================================
    FLOAT WHATSAPP BTN
 ============================================================ */
-      .wa-float {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        z-index: 200;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        background: #25d366;
-        color: var(--white);
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 14px 24px;
-        box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
-        transition:
-          transform 0.2s,
-          box-shadow 0.2s;
-        animation: fadeUp 0.6s ease both 0.8s;
-      }
-      .wa-float:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
-      }
+.wa-float {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 24px;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.6s ease both 0.8s;
+}
+.wa-float:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(37,211,102,0.4);
+}
 
-      /* ============================================================
+/* ============================================================
    ANIMATIONS
 ============================================================ */
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(24px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
-      /* stagger why cards */
-      .why-card {
-        animation: fadeUp 0.6s ease both;
-      }
-      .why-card:nth-child(1) {
-        animation-delay: 0.05s;
-      }
-      .why-card:nth-child(2) {
-        animation-delay: 0.15s;
-      }
-      .why-card:nth-child(3) {
-        animation-delay: 0.25s;
-      }
-      .why-card:nth-child(4) {
-        animation-delay: 0.35s;
-      }
+/* stagger why cards */
+.why-card { animation: fadeUp 0.6s ease both; }
+.why-card:nth-child(1) { animation-delay: 0.05s; }
+.why-card:nth-child(2) { animation-delay: 0.15s; }
+.why-card:nth-child(3) { animation-delay: 0.25s; }
+.why-card:nth-child(4) { animation-delay: 0.35s; }
 
-      /* stagger product cards */
-      .product-card {
-        animation: fadeUp 0.6s ease both;
-      }
-      .product-card:nth-child(1) {
-        animation-delay: 0.05s;
-      }
-      .product-card:nth-child(2) {
-        animation-delay: 0.12s;
-      }
-      .product-card:nth-child(3) {
-        animation-delay: 0.19s;
-      }
-      .product-card:nth-child(4) {
-        animation-delay: 0.26s;
-      }
-      .product-card:nth-child(5) {
-        animation-delay: 0.33s;
-      }
-      .product-card:nth-child(6) {
-        animation-delay: 0.4s;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- ============================================================
+/* stagger product cards */
+.product-card { animation: fadeUp 0.6s ease both; }
+.product-card:nth-child(1) { animation-delay: 0.05s; }
+.product-card:nth-child(2) { animation-delay: 0.12s; }
+.product-card:nth-child(3) { animation-delay: 0.19s; }
+.product-card:nth-child(4) { animation-delay: 0.26s; }
+.product-card:nth-child(5) { animation-delay: 0.33s; }
+.product-card:nth-child(6) { animation-delay: 0.40s; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
      NAV
 ============================================================ -->
-    <nav>
-      <a href="#" class="nav-logo">PRO <span>SUPLEMENTOS</span></a>
-      <ul class="nav-links">
-        <li><a href="#why">Por que usar</a></li>
-        <li><a href="#products">Produtos</a></li>
-        <li><a href="#testimonials">Resultados</a></li>
-        <li><a href="#cta" class="nav-cta">Comprar agora</a></li>
-      </ul>
-    </nav>
+<nav>
+  <a href="#" class="nav-logo">PRO <span>SUPLEMENTOS</span></a>
+  <ul class="nav-links">
+    <li><a href="#why">Por que usar</a></li>
+    <li><a href="#products">Produtos</a></li>
+    <li><a href="#testimonials">Resultados</a></li>
+    <li><a href="#cta" class="nav-cta">Comprar agora</a></li>
+  </ul>
+</nav>
 
-    <!-- ============================================================
+<!-- ============================================================
      HERO
 ============================================================ -->
-    <section id="hero">
-      <div class="hero-inner">
-        <div class="hero-left">
-          <div class="hero-eyebrow">
-            <span class="label">Uberaba, MG — +1000 Entregas</span>
-          </div>
-          <h1 class="hero-title">
-            DOMINE<br />
-            <span class="red">O</span> <span class="outline">TREINO</span>
-          </h1>
-          <p class="hero-desc">
-            Suplementos de alto desempenho desenvolvidos para atletas que
-            recusam a mediocridade. Ciência real. Resultado garantido.
-          </p>
-          <div class="hero-actions">
-            <a href="#products" class="btn-primary">
-              Ver Produtos
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              >
-                <line x1="3" y1="8" x2="13" y2="8" />
-                <polyline points="9,4 13,8 9,12" />
-              </svg>
-            </a>
-            <a href="#why" class="btn-secondary">Por que usar</a>
-          </div>
-          <div class="hero-stats">
-            <div>
-              <div class="stat-num">+1<span>K</span></div>
-              <div class="stat-label">Entregas Feitas</div>
-            </div>
-            <div>
-              <div class="stat-num">98<span>%</span></div>
-              <div class="stat-label">Satisfação</div>
-            </div>
-            <div>
-              <div class="stat-num">6<span>+</span></div>
-              <div class="stat-label">Produtos Elite</div>
-            </div>
-          </div>
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="label">Uberaba, MG — +1000 Entregas</span>
+      </div>
+      <h1 class="hero-title">
+        DOMINE<br>
+        <span class="red">O</span> <span class="outline">TREINO</span>
+      </h1>
+      <p class="hero-desc">
+        Suplementos de alto desempenho desenvolvidos para atletas que recusam a mediocridade. Ciência real. Resultado garantido.
+      </p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">
+          Ver Produtos
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+        </a>
+        <a href="#why" class="btn-secondary">Por que usar</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">+1<span>K</span></div>
+          <div class="stat-label">Entregas Feitas</div>
         </div>
-
-        <div class="hero-right">
-          <div class="hero-visual">
-            <div class="hero-visual-ring"></div>
-            <div class="hero-visual-ring r2"></div>
-            <div class="hero-product-box">
-              <svg
-                class="hero-product-icon"
-                width="64"
-                height="64"
-                viewBox="0 0 48 48"
-                fill="none"
-                stroke="#e63b2e"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="4" y="20" width="6" height="8" rx="1.5" />
-                <rect x="38" y="20" width="6" height="8" rx="1.5" />
-                <rect x="10" y="17" width="5" height="14" rx="1.5" />
-                <rect x="33" y="17" width="5" height="14" rx="1.5" />
-                <line x1="15" y1="24" x2="33" y2="24" />
-              </svg>
-              <div class="hero-product-name">WHEY PROTEIN</div>
-              <div class="hero-product-sub">Pro Suplementos</div>
-            </div>
-            <div class="hero-badge">
-              <div class="hero-badge-num">30</div>
-              <div class="hero-badge-text">doses</div>
-            </div>
-          </div>
+        <div>
+          <div class="stat-num">98<span>%</span></div>
+          <div class="stat-label">Satisfação</div>
+        </div>
+        <div>
+          <div class="stat-num">6<span>+</span></div>
+          <div class="stat-label">Produtos Elite</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- ============================================================
+    <div class="hero-right">
+      <div class="hero-visual">
+        <div class="hero-visual-ring"></div>
+        <div class="hero-visual-ring r2"></div>
+        <div class="hero-product-box">
+          <svg class="hero-product-icon" width="64" height="64" viewBox="0 0 48 48" fill="none" stroke="#e63b2e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="20" width="6" height="8" rx="1.5"/>
+            <rect x="38" y="20" width="6" height="8" rx="1.5"/>
+            <rect x="10" y="17" width="5" height="14" rx="1.5"/>
+            <rect x="33" y="17" width="5" height="14" rx="1.5"/>
+            <line x1="15" y1="24" x2="33" y2="24"/>
+          </svg>
+          <div class="hero-product-name">WHEY PROTEIN</div>
+          <div class="hero-product-sub">Pro Suplementos</div>
+        </div>
+        <div class="hero-badge">
+          <div class="hero-badge-num">30</div>
+          <div class="hero-badge-text">doses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      TICKER
 ============================================================ -->
-    <div class="ticker">
-      <div class="ticker-inner">
-        <!-- duplicated for seamless loop -->
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>WHEY PROTEIN</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>CREATINA</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>BCAA</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>PRÉ TREINO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>HIPERCALÓRICO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>TERMOGÊNICO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>FRETE GRÁTIS ACIMA DE R$199</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>WHEY PROTEIN</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>CREATINA</span
-        >
-        <span class="ticker-item"><span class="ticker-dot"></span>BCAA</span>
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>PRÉ TREINO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>HIPERCALÓRICO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>TERMOGÊNICO</span
-        >
-        <span class="ticker-item"
-          ><span class="ticker-dot"></span>FRETE GRÁTIS ACIMA DE R$199</span
-        >
-      </div>
-    </div>
+<div class="ticker">
+  <div class="ticker-inner">
+    <!-- duplicated for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span>WHEY PROTEIN</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>CREATINA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>BCAA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>PRÉ TREINO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>HIPERCALÓRICO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>TERMOGÊNICO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>FRETE GRÁTIS ACIMA DE R$199</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>WHEY PROTEIN</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>CREATINA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>BCAA</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>PRÉ TREINO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>HIPERCALÓRICO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>TERMOGÊNICO</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>FRETE GRÁTIS ACIMA DE R$199</span>
+  </div>
+</div>
 
-    <!-- ============================================================
+<!-- ============================================================
      WHY SUPPLEMENTS
 ============================================================ -->
-    <div id="why">
-      <div class="section">
-        <div class="section-head" style="text-align: center">
-          <div
-            class="label"
-            style="justify-content: center; margin-bottom: 16px"
-          >
-            Ciência & Performance
-          </div>
-          <h2 class="display">POR QUE USAR<br /><span>SUPLEMENTOS?</span></h2>
-          <p
-            class="section-sub"
-            style="margin: 20px auto 0; text-align: center"
-          >
-            Cada produto foi desenvolvido para um objetivo específico. Descubra
-            como a suplementação certa transforma seu treino.
-          </p>
-        </div>
-
-        <div class="why-grid">
-          <div class="why-card">
-            <span class="why-card-num">01</span>
-            <svg
-              class="why-icon"
-              viewBox="0 0 48 48"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="4" y="20" width="6" height="8" rx="1.5" />
-              <rect x="38" y="20" width="6" height="8" rx="1.5" />
-              <rect x="10" y="17" width="5" height="14" rx="1.5" />
-              <rect x="33" y="17" width="5" height="14" rx="1.5" />
-              <line x1="15" y1="24" x2="33" y2="24" />
-            </svg>
-            <div class="why-title">
-              <span class="why-title-bar"></span>Ganho de Massa Muscular
-            </div>
-            <p class="why-text">
-              Suplementos como Whey Protein e BCAA fornecem os aminoácidos
-              essenciais que o músculo precisa para crescer. Sem aporte proteico
-              suficiente, o treino pesado pode quebrar mais músculo do que
-              constrói.
-            </p>
-            <span class="why-tag">Hipertrofia →</span>
-          </div>
-
-          <div class="why-card">
-            <span class="why-card-num">02</span>
-            <svg
-              class="why-icon"
-              viewBox="0 0 48 48"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="28,6 14,26 24,26 20,42 34,22 24,22 28,6" />
-            </svg>
-            <div class="why-title">
-              <span class="why-title-bar"></span>Mais Energia nos Treinos
-            </div>
-            <p class="why-text">
-              O Pré Treino e a Creatina elevam sua capacidade de trabalho,
-              retardam a fadiga e aumentam a força explosiva. Mais energia
-              significa mais repetições, mais carga e resultados superiores em
-              menos tempo.
-            </p>
-            <span class="why-tag">Performance →</span>
-          </div>
-
-          <div class="why-card">
-            <span class="why-card-num">03</span>
-            <svg
-              class="why-icon"
-              viewBox="0 0 48 48"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M24 42c-7 0-12-5-12-12 0-5 3-9 7-11-1 3 0 6 2 8 1-4 4-8 4-13 4 3 6 8 6 13 2-2 3-5 3-8 3 3 4 7 4 11 0 7-5 12-14 12z"
-              />
-              <path
-                d="M20 34c0-3 2-5 4-6 0 2 1 3 2 4 1-1 1-3 1-4 2 1 3 3 3 6a4 4 0 01-8 0z"
-              />
-            </svg>
-            <div class="why-title">
-              <span class="why-title-bar"></span>Aceleração do Metabolismo
-            </div>
-            <p class="why-text">
-              Termogênicos combinam compostos ativos que elevam a temperatura
-              corporal e potencializam o gasto calórico ao longo do dia. Aliado
-              a uma dieta ajustada, o processo de definição se torna muito mais
-              eficiente.
-            </p>
-            <span class="why-tag">Definição →</span>
-          </div>
-
-          <div class="why-card">
-            <span class="why-card-num">04</span>
-            <svg
-              class="why-icon"
-              viewBox="0 0 48 48"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M24 6L10 12v10c0 9 6 17 14 20 8-3 14-11 14-20V12L24 6z"
-              />
-              <polyline points="18,24 22,28 30,20" />
-            </svg>
-            <div class="why-title">
-              <span class="why-title-bar"></span>Recuperação Muscular
-            </div>
-            <p class="why-text">
-              O músculo cresce fora da academia. BCAAs e Whey aceleram o reparo
-              das fibras após o esforço, reduzem a dor tardia e permitem que
-              você treine novamente com mais intensidade e menor intervalo entre
-              sessões.
-            </p>
-            <span class="why-tag">Regeneração →</span>
-          </div>
-        </div>
-      </div>
+<div id="why">
+  <div class="section">
+    <div class="section-head" style="text-align:center">
+      <div class="label" style="justify-content:center;margin-bottom:16px">Ciência & Performance</div>
+      <h2 class="display">POR QUE USAR<br><span>SUPLEMENTOS?</span></h2>
+      <p class="section-sub" style="margin:20px auto 0;text-align:center">Cada produto foi desenvolvido para um objetivo específico. Descubra como a suplementação certa transforma seu treino.</p>
     </div>
 
-    <!-- ============================================================
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-card-num">01</span>
+        <svg class="why-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="20" width="6" height="8" rx="1.5"/><rect x="38" y="20" width="6" height="8" rx="1.5"/>
+          <rect x="10" y="17" width="5" height="14" rx="1.5"/><rect x="33" y="17" width="5" height="14" rx="1.5"/>
+          <line x1="15" y1="24" x2="33" y2="24"/>
+        </svg>
+        <div class="why-title"><span class="why-title-bar"></span>Ganho de Massa Muscular</div>
+        <p class="why-text">Suplementos como Whey Protein e BCAA fornecem os aminoácidos essenciais que o músculo precisa para crescer. Sem aporte proteico suficiente, o treino pesado pode quebrar mais músculo do que constrói.</p>
+        <span class="why-tag">Hipertrofia →</span>
+      </div>
+
+      <div class="why-card">
+        <span class="why-card-num">02</span>
+        <svg class="why-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="28,6 14,26 24,26 20,42 34,22 24,22 28,6"/>
+        </svg>
+        <div class="why-title"><span class="why-title-bar"></span>Mais Energia nos Treinos</div>
+        <p class="why-text">O Pré Treino e a Creatina elevam sua capacidade de trabalho, retardam a fadiga e aumentam a força explosiva. Mais energia significa mais repetições, mais carga e resultados superiores em menos tempo.</p>
+        <span class="why-tag">Performance →</span>
+      </div>
+
+      <div class="why-card">
+        <span class="why-card-num">03</span>
+        <svg class="why-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 42c-7 0-12-5-12-12 0-5 3-9 7-11-1 3 0 6 2 8 1-4 4-8 4-13 4 3 6 8 6 13 2-2 3-5 3-8 3 3 4 7 4 11 0 7-5 12-14 12z"/>
+          <path d="M20 34c0-3 2-5 4-6 0 2 1 3 2 4 1-1 1-3 1-4 2 1 3 3 3 6a4 4 0 01-8 0z"/>
+        </svg>
+        <div class="why-title"><span class="why-title-bar"></span>Aceleração do Metabolismo</div>
+        <p class="why-text">Termogênicos combinam compostos ativos que elevam a temperatura corporal e potencializam o gasto calórico ao longo do dia. Aliado a uma dieta ajustada, o processo de definição se torna muito mais eficiente.</p>
+        <span class="why-tag">Definição →</span>
+      </div>
+
+      <div class="why-card">
+        <span class="why-card-num">04</span>
+        <svg class="why-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6L10 12v10c0 9 6 17 14 20 8-3 14-11 14-20V12L24 6z"/>
+          <polyline points="18,24 22,28 30,20"/>
+        </svg>
+        <div class="why-title"><span class="why-title-bar"></span>Recuperação Muscular</div>
+        <p class="why-text">O músculo cresce fora da academia. BCAAs e Whey aceleram o reparo das fibras após o esforço, reduzem a dor tardia e permitem que você treine novamente com mais intensidade e menor intervalo entre sessões.</p>
+        <span class="why-tag">Regeneração →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
      PRODUCTS
 ============================================================ -->
-    <div id="products">
-      <div class="section">
-        <div
-          class="section-head"
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            flex-wrap: wrap;
-            gap: 24px;
-          "
-        >
-          <div>
-            <div class="label" style="margin-bottom: 14px">Linha Completa</div>
-            <h2 class="display">NOSSOS<br /><span>PRODUTOS</span></h2>
-          </div>
-          <p class="section-sub">
-            Do ganho de massa à definição extrema — cada fórmula foi construída
-            para entregar resultado real.
-          </p>
-        </div>
+<div id="products">
+  <div class="section">
+    <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px">
+      <div>
+        <div class="label" style="margin-bottom:14px">Linha Completa</div>
+        <h2 class="display">NOSSOS<br><span>PRODUTOS</span></h2>
+      </div>
+      <p class="section-sub">Do ganho de massa à definição extrema — cada fórmula foi construída para entregar resultado real.</p>
+    </div>
 
-        <div class="products-grid">
-          <!-- WHEY PROTEIN -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Mais Vendido</span>
-              <div class="product-meta">
-                <div class="product-name">WHEY PROTEIN</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Proteína de altíssima absorção e máxima pureza para construção
-                muscular de elite. Rápida digestão no pós-treino.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Hipertrofia</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
+    <div class="products-grid">
 
-          <!-- CREATINA -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Ciência Comprovada</span>
-              <div class="product-meta">
-                <div class="product-name">CREATINA</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Força bruta e explosão em cada repetição. O suplemento com maior
-                comprovação científica do mundo. Força real.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Força & Explosão</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+      <!-- WHEY PROTEIN -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Mais Vendido</span>
+          <div class="product-meta">
+            <div class="product-name">WHEY PROTEIN</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
           </div>
-
-          <!-- BCAA -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Anti-Catabolismo</span>
-              <div class="product-meta">
-                <div class="product-name">BCAA</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Recuperação acelerada e proteção muscular extrema. Aminoácidos
-                essenciais que preservam seu músculo nos treinos intensos.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Recuperação</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- PRÉ TREINO -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Energia Máxima</span>
-              <div class="product-meta">
-                <div class="product-name">PRÉ TREINO</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Energia insana, foco inabalável e vasodilatação extrema do
-                início ao fim. Domine os pesos com intensidade total.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Performance</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- HIPERCALÓRICO -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Ganho de Massa</span>
-              <div class="product-meta">
-                <div class="product-name">HIPERCALÓRICO</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Densidade muscular e ganho de massa bruta. Combinação perfeita
-                de carboidratos e proteínas para ectomorfos.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Volume Muscular</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- TERMOGÊNICO -->
-          <div class="product-card">
-            <div class="product-body">
-              <span class="product-badge">Definição</span>
-              <div class="product-meta">
-                <div class="product-name">TERMOGÊNICO</div>
-                <div class="product-stars">
-                  <span>★</span><span>★</span><span>★</span><span>★</span
-                  ><span>★</span>
-                </div>
-              </div>
-              <p class="product-desc">
-                Queima de gordura acelerada, metabolismo no máximo e definição
-                muscular. Shape de competição para o dia a dia.
-              </p>
-              <div class="product-footer">
-                <span class="product-tag">Cutting</span>
-                <a
-                  href="https://wa.me/5534996531230"
-                  target="_blank"
-                  class="product-btn"
-                >
-                  Pedir agora
-                  <svg
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  >
-                    <line x1="3" y1="8" x2="13" y2="8" />
-                    <polyline points="9,4 13,8 9,12" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+          <p class="product-desc">Proteína de altíssima absorção e máxima pureza para construção muscular de elite. Rápida digestão no pós-treino.</p>
+          <div class="product-footer">
+            <span class="product-tag">Hipertrofia</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- ============================================================
+      <!-- CREATINA -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Ciência Comprovada</span>
+          <div class="product-meta">
+            <div class="product-name">CREATINA</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <p class="product-desc">Força bruta e explosão em cada repetição. O suplemento com maior comprovação científica do mundo. Força real.</p>
+          <div class="product-footer">
+            <span class="product-tag">Força & Explosão</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BCAA -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Anti-Catabolismo</span>
+          <div class="product-meta">
+            <div class="product-name">BCAA</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <p class="product-desc">Recuperação acelerada e proteção muscular extrema. Aminoácidos essenciais que preservam seu músculo nos treinos intensos.</p>
+          <div class="product-footer">
+            <span class="product-tag">Recuperação</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRÉ TREINO -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Energia Máxima</span>
+          <div class="product-meta">
+            <div class="product-name">PRÉ TREINO</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <p class="product-desc">Energia insana, foco inabalável e vasodilatação extrema do início ao fim. Domine os pesos com intensidade total.</p>
+          <div class="product-footer">
+            <span class="product-tag">Performance</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- HIPERCALÓRICO -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Ganho de Massa</span>
+          <div class="product-meta">
+            <div class="product-name">HIPERCALÓRICO</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <p class="product-desc">Densidade muscular e ganho de massa bruta. Combinação perfeita de carboidratos e proteínas para ectomorfos.</p>
+          <div class="product-footer">
+            <span class="product-tag">Volume Muscular</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TERMOGÊNICO -->
+      <div class="product-card">
+        <div class="product-body">
+          <span class="product-badge">Definição</span>
+          <div class="product-meta">
+            <div class="product-name">TERMOGÊNICO</div>
+            <div class="product-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          </div>
+          <p class="product-desc">Queima de gordura acelerada, metabolismo no máximo e definição muscular. Shape de competição para o dia a dia.</p>
+          <div class="product-footer">
+            <span class="product-tag">Cutting</span>
+            <a href="https://wa.me/5534996531230" target="_blank" class="product-btn">
+              Pedir agora
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="9,4 13,8 9,12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
      FEATURE STRIP
 ============================================================ -->
-    <div id="features">
-      <div class="features-grid">
-        <div class="feature-item">
-          <svg
-            class="feature-icon"
-            viewBox="0 0 44 44"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="6" y="6" width="32" height="32" rx="2" />
-            <polyline points="14,22 19,27 30,17" />
-          </svg>
-          <div>
-            <div class="feature-title">Qualidade Certificada</div>
-            <p class="feature-text">
-              Todos os produtos passam por rigoroso controle de qualidade e são
-              testados em laboratório antes de chegar até você.
-            </p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <svg
-            class="feature-icon"
-            viewBox="0 0 44 44"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="22" cy="22" r="16" />
-            <polyline points="22,12 22,22 28,26" />
-          </svg>
-          <div>
-            <div class="feature-title">Entrega Rápida</div>
-            <p class="feature-text">
-              Pedidos despachados em até 24h. Frete grátis para compras acima de
-              R$199 em todo o Brasil.
-            </p>
-          </div>
-        </div>
-        <div class="feature-item">
-          <svg
-            class="feature-icon"
-            viewBox="0 0 44 44"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M22 6l4 9 10 1.5-7 7 1.6 10L22 29l-8.6 4.5L15 23.5l-7-7L18 15z"
-            />
-          </svg>
-          <div>
-            <div class="feature-title">Garantia de Resultado</div>
-            <p class="feature-text">
-              Não ficou satisfeito? Devolvemos seu dinheiro em até 7 dias. Seu
-              resultado é nossa prioridade.
-            </p>
-          </div>
-        </div>
+<div id="features">
+  <div class="features-grid">
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="6" width="32" height="32" rx="2"/>
+        <polyline points="14,22 19,27 30,17"/>
+      </svg>
+      <div>
+        <div class="feature-title">Qualidade Certificada</div>
+        <p class="feature-text">Todos os produtos passam por rigoroso controle de qualidade e são testados em laboratório antes de chegar até você.</p>
       </div>
     </div>
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="22" cy="22" r="16"/>
+        <polyline points="22,12 22,22 28,26"/>
+      </svg>
+      <div>
+        <div class="feature-title">Entrega Rápida</div>
+        <p class="feature-text">Pedidos despachados em até 24h. Frete grátis para compras acima de R$199 em todo o Brasil.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <svg class="feature-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 6l4 9 10 1.5-7 7 1.6 10L22 29l-8.6 4.5L15 23.5l-7-7L18 15z"/>
+      </svg>
+      <div>
+        <div class="feature-title">Garantia de Resultado</div>
+        <p class="feature-text">Não ficou satisfeito? Devolvemos seu dinheiro em até 7 dias. Seu resultado é nossa prioridade.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- ============================================================
+<!-- ============================================================
      TESTIMONIALS
 ============================================================ -->
-    <div id="testimonials">
-      <div class="section">
-        <div class="section-head" style="text-align: center">
-          <div
-            class="label"
-            style="justify-content: center; margin-bottom: 16px"
-          >
-            Resultados Reais
+<div id="testimonials">
+  <div class="section">
+    <div class="section-head" style="text-align:center">
+      <div class="label" style="justify-content:center;margin-bottom:16px">Resultados Reais</div>
+      <h2 class="display">O QUE NOSSOS<br><span>ATLETAS DIZEM</span></h2>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Em 3 meses usando o Whey Protein com Creatina, ganhei 5kg de massa magra. Jamais tive resultado assim com outros suplementos. Produto sério, resultado sério.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div>
+            <div class="testi-name">Rafael Mendes</div>
+            <div class="testi-role">Fisiculturista amador — SP</div>
           </div>
-          <h2 class="display">O QUE NOSSOS<br /><span>ATLETAS DIZEM</span></h2>
         </div>
+      </div>
 
-        <div class="testi-grid">
-          <div class="testi-card">
-            <div class="testi-stars">
-              <span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span>
-            </div>
-            <div class="testi-quote">"</div>
-            <p class="testi-text">
-              Em 3 meses usando o Whey Protein com Creatina, ganhei 5kg de massa
-              magra. Jamais tive resultado assim com outros suplementos. Produto
-              sério, resultado sério.
-            </p>
-            <div class="testi-author">
-              <div class="testi-avatar">R</div>
-              <div>
-                <div class="testi-name">Rafael Mendes</div>
-                <div class="testi-role">Fisiculturista amador — SP</div>
-              </div>
-            </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">O termogênico mudou minha vida. Perdi 8kg em 2 meses com dieta e treino, o metabolismo acelerou de verdade. Recomendo 100% para quem busca definição.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">J</div>
+          <div>
+            <div class="testi-name">Juliana Costa</div>
+            <div class="testi-role">Atleta funcional — MG</div>
           </div>
+        </div>
+      </div>
 
-          <div class="testi-card">
-            <div class="testi-stars">
-              <span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span>
-            </div>
-            <div class="testi-quote">"</div>
-            <p class="testi-text">
-              O termogênico mudou minha vida. Perdi 8kg em 2 meses com dieta e
-              treino, o metabolismo acelerou de verdade. Recomendo 100% para
-              quem busca definição.
-            </p>
-            <div class="testi-author">
-              <div class="testi-avatar">J</div>
-              <div>
-                <div class="testi-name">Juliana Costa</div>
-                <div class="testi-role">Atleta funcional — MG</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testi-card">
-            <div class="testi-stars">
-              <span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span><span class="star">★</span
-              ><span class="star">★</span>
-            </div>
-            <div class="testi-quote">"</div>
-            <p class="testi-text">
-              O pré treino é outro nível. Foco e energia do início ao fim, sem
-              crash depois. Já testei vários e esse é disparado o melhor que já
-              tomei. Não largo mais.
-            </p>
-            <div class="testi-author">
-              <div class="testi-avatar">T</div>
-              <div>
-                <div class="testi-name">Thiago Alves</div>
-                <div class="testi-role">Praticante de CrossFit — RJ</div>
-              </div>
-            </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">O pré treino é outro nível. Foco e energia do início ao fim, sem crash depois. Já testei vários e esse é disparado o melhor que já tomei. Não largo mais.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">T</div>
+          <div>
+            <div class="testi-name">Thiago Alves</div>
+            <div class="testi-role">Praticante de CrossFit — RJ</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <!-- ============================================================
+<!-- ============================================================
      CTA
 ============================================================ -->
-    <section id="cta">
-      <div class="cta-inner">
-        <div class="label cta-label">Comece Agora</div>
-        <h2 class="cta-title">PRONTO PARA<br /><span>EVOLUIR?</span></h2>
-        <p class="cta-text">
-          Receba ofertas exclusivas, dicas de treino e lançamentos diretamente
-          no seu WhatsApp. Entre para a comunidade Pro Suplementos.
-        </p>
-        <div class="cta-form">
-          <input
-            class="cta-input"
-            type="tel"
-            placeholder="Seu número de WhatsApp"
-          />
-          <button class="cta-submit">Entrar →</button>
-        </div>
-      </div>
-    </section>
+<section id="cta">
+  <div class="cta-inner">
+    <div class="label cta-label">Comece Agora</div>
+    <h2 class="cta-title">PRONTO PARA<br><span>EVOLUIR?</span></h2>
+    <p class="cta-text">Acompanhe lançamentos, promoções exclusivas e dicas de treino. Siga a Pro Suplementos no Instagram e fique por dentro de tudo.</p>
+    <a href="https://www.instagram.com/pro_suplementos_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn-instagram">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      Seguir no Instagram
+    </a>
+  </div>
+</section>
 
-    <!-- ============================================================
+<!-- ============================================================
      FOOTER
 ============================================================ -->
-    <footer>
-      <div class="footer-inner">
-        <div>
-          <a href="#" class="footer-logo">PRO <span>SUPLEMENTOS</span></a>
-          <p class="footer-desc">
-            Loja de suplementos em Uberaba, MG. Mais de 1000 entregas
-            realizadas. Vendas online com atendimento pelo Direct e WhatsApp.
-          </p>
-        </div>
-        <div>
-          <div class="footer-col-title">Produtos</div>
-          <ul class="footer-links">
-            <li><a href="#">Whey Protein</a></li>
-            <li><a href="#">Creatina</a></li>
-            <li><a href="#">BCAA</a></li>
-            <li><a href="#">Pré Treino</a></li>
-            <li><a href="#">Hipercalórico</a></li>
-            <li><a href="#">Termogênico</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Empresa</div>
-          <ul class="footer-links">
-            <li><a href="#">Sobre nós</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Resultados</a></li>
-            <li>
-              <a
-                href="https://www.instagram.com/pro_suplementos_"
-                target="_blank"
-                >Instagram</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Atendimento</div>
-          <ul class="footer-links">
-            <li><a href="#">WhatsApp</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Trocas e devoluções</a></li>
-            <li><a href="#">Rastrear pedido</a></li>
-          </ul>
-        </div>
-      </div>
-      <div
-        class="footer-bottom"
-        style="max-width: 1200px; margin: 48px auto 0; padding: 28px 0 0"
-      >
-        <span class="footer-copy"
-          >© 2026 Pro Suplementos. Todos os direitos reservados.</span
-        >
-        <a href="https://wa.me/5534996531230" class="footer-whats">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-            />
-          </svg>
-          Falar no WhatsApp
-        </a>
-      </div>
-    </footer>
-
-    <!-- Float WhatsApp -->
-    <a href="https://wa.me/5534996531230" class="wa-float" target="_blank">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path
-          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-        />
-      </svg>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="#" class="footer-logo">PRO <span>SUPLEMENTOS</span></a>
+      <p class="footer-desc">Loja de suplementos em Uberaba, MG. Mais de 1000 entregas realizadas. Vendas online com atendimento pelo Direct e WhatsApp.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Produtos</div>
+      <ul class="footer-links">
+        <li><a href="#">Whey Protein</a></li>
+        <li><a href="#">Creatina</a></li>
+        <li><a href="#">BCAA</a></li>
+        <li><a href="#">Pré Treino</a></li>
+        <li><a href="#">Hipercalórico</a></li>
+        <li><a href="#">Termogênico</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Empresa</div>
+      <ul class="footer-links">
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Resultados</a></li>
+        <li><a href="https://www.instagram.com/pro_suplementos_" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Atendimento</div>
+      <ul class="footer-links">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Trocas e devoluções</a></li>
+        <li><a href="#">Rastrear pedido</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1200px;margin:48px auto 0;padding:28px 0 0">
+    <span class="footer-copy">© 2026 Pro Suplementos. Todos os direitos reservados.</span>
+    <a href="https://wa.me/5534996531230" class="footer-whats">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Falar no WhatsApp
     </a>
-  </body>
+  </div>
+</footer>
+
+<!-- Float WhatsApp -->
+<a href="https://wa.me/5534996531230" class="wa-float" target="_blank">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Falar no WhatsApp
+</a>
+
+</body>
 </html>
